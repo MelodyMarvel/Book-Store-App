@@ -66,14 +66,17 @@ function BookList() {
     return <div>Loading...</div>;
   }
 
-  return (  
-    <div>
-      <h2>Books in Category: {category}</h2>
+  return ( 
+    <>
+        <h2>Books in Category: {category}</h2>
+    <div className='container category'>
       {books.map((book, index) => {
         return (
           <Book key = {index} {...book} addToCart={addToCart}/>
               )})}
     </div>
+    </> 
+  
   );
 }
 

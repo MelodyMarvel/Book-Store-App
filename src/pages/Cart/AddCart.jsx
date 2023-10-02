@@ -1,10 +1,8 @@
-import { useGlobalContext } from '../../context';
 import { useCartContext } from '../../cartContext';
 import { useEffect, useState } from 'react';
 import './AddToCart.css';
 
 function AddCart() {
-  const { books } = useGlobalContext();
   const { cartItems,setCartItems, removeFromCart } = useCartContext();
 const [total, setTotal] = useState()
 

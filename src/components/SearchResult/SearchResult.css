@@ -44,6 +44,11 @@
 .red-text {
     color: red;
   }
+  .category{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
 @media screen and (min-width: 600px){
     .booklist-content{
         grid-template-columns: repeat(2, 1fr);
