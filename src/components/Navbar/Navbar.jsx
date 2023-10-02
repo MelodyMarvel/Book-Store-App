@@ -6,9 +6,12 @@ import { Link } from 'react-router-dom';
 
 import {HiOutlineMenuAlt3} from "react-icons/hi";
 import {BsFillCartDashFill} from "react-icons/bs";
+import { useCartContext } from "../../cartContext";
 
 
 function Navbar() {
+  const { cartItems } = useCartContext();
+
   const [toggleMenu, setToggleMenu] = useState(false)
   const handleNavbar = () => setToggleMenu(!toggleMenu);
 
@@ -32,15 +35,15 @@ function Navbar() {
       <div className={toggleMenu ? "navbar-collapse show-navbar-collapse" : "navbar-collapse"}>
         <ul className = "navbar-nav">
           <li className='nav-item'>
-            <Link to = "book" className='nav-link text-uppercase text-white fs-22 fw-6 ls-1'>Home</Link>
+            <Link to = "/" className='nav-link text-uppercase text-white fs-22 fw-6 ls-1'>Home</Link>
           </li>
-             {/* <span>{cart.length}</span> */}
-          <Link to="/cart">
+          <Link to="/cart" className="nav-cart">
           <BsFillCartDashFill size = {30} style = {{
             color: `${toggleMenu ? "#fff" : "#010101"}`
           }} />          
           </Link>
-         
+          <span style={{color:"red"}}>{cartItems.length}</span>
+
         </ul>
       </div>
 

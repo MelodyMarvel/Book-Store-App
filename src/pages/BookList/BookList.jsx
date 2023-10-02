@@ -2,11 +2,17 @@ import React, { useEffect,useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Book from '../../components/SearchResult/Book';
+import { useCartContext } from '../../cartContext';
+import { useGlobalContext } from '../../context';
 
 function BookList() {
   const { category } = useParams();
-  const [books, setBooks] = useState([]);
+  // const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { books, setBooks } = useGlobalContext();
+
+  const { addToCart } = useCartContext();
 
   useEffect(() => {
     let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=5`;
@@ -27,14 +33,17 @@ function BookList() {
                   publishedDate,
                   title,
                 } = volumeInfo;
-        
+                
+                const price = (Math.random() * (100 - 10) + 10).toFixed(2);
+
               return {
                   id: id,
                   authors: authors,
                   categories: categories,
                   imageLinks: imageLinks,
                   publishedDate: publishedDate,
-                  title: title
+                  title: title,
+                  price:price
               }
           });
 
@@ -57,13 +66,13 @@ function BookList() {
     return <div>Loading...</div>;
   }
 
-  return (
+  return (  
     <div>
       <h2>Books in Category: {category}</h2>
       {books.map((book, index) => {
-return (
-                <Book key = {index} {...book} />
-              )        })}
+        return (
+          <Book key = {index} {...book} addToCart={addToCart}/>
+              )})}
     </div>
   );
 }

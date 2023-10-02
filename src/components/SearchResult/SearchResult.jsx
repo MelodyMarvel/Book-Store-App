@@ -1,9 +1,7 @@
 import { useGlobalContext } from '../../context';
 import Book from "./Book";
 import Loading from "../Loader/Loader";
-import coverImg from "../../assets/No_Cover.jpg";
 import "./SearchResult.css";
-import { useLocation } from 'react-router-dom';
 
 
 const SearchResult = () => {
@@ -12,8 +10,6 @@ const SearchResult = () => {
   const bookList = books.map((singleBook) => {
     return {
       ...singleBook,
-      // cover_img: singleBook.imageLinks,
-      // title: singleBook.title,
 
     }
   });
@@ -29,9 +25,9 @@ const SearchResult = () => {
         </div>
         <div className='booklist-content grid'>
           {
-            bookList.map((item, index) => {
+            bookList.map((book, index) => {
               return (
-                <Book key = {index} {...item} />
+                <Book key = {index} {...book} />
               )
             })
           }

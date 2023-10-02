@@ -1,4 +1,4 @@
-import {useState, useContext, createContext, useCallback} from 'react';
+import {useState, useContext, createContext, useCallback, useRef} from 'react';
 import axios from 'axios';
 // const apiKey = 'AIzaSyC2RBDtMq163rcWyIULTXC8Us1KGIxVJpg'
 // const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${queryString}&key=${apiKey}`;
@@ -6,16 +6,15 @@ import axios from 'axios';
 const AppContext = createContext()
 
 const AppProvider = ({children}) => {
-    const [selectedCategory, setSelectedCategory] = useState(null); // Add selectedCategory state
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(true)
     const [searchResults, setSearchResults] = useState("");
-    // const [defaultBooks, setDefaultBooks] = useState([])
 
     const apiKey = 'AIzaSyC2RBDtMq163rcWyIULTXC8Us1KGIxVJpg'
 
-    const fetchBooks = useCallback(async(searchQuery="python", category="")=> {
+    const fetchBooks = useCallback(async(searchQuery="soccer", category="")=> {
         setLoading(true)
 
         try{
@@ -26,23 +25,28 @@ const AppProvider = ({children}) => {
 
             if(data.items){
                 const newBooks = data.items.map((bookSingle) => {
-                    const {id, volumeInfo} = bookSingle;
+                    const { id, volumeInfo} = bookSingle;
 
                     const {
                         authors,
                         categories,
                         imageLinks,
                         publishedDate,
+                        description,
                         title,
                       } = volumeInfo;
               
+                      const price = (Math.random() * (100 - 10) + 10).toFixed(2);
                     return {
                         id: id,
                         authors: authors,
                         categories: categories,
                         imageLinks: imageLinks,
                         publishedDate: publishedDate,
-                        title: title
+                        description:description,
+                        title: title,
+                        price:price,
+                        qty : 1
                     }
                 });
 

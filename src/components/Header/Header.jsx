@@ -1,6 +1,6 @@
 // import React from 'react'
 import Categories from "../Categories/Categories"
-import Navbar from "../Navbar/Navbar"
+// import Navbar from "../Navbar/Navbar"
 import SearchForm from "../SearchForm/SearchForm"
 import "./Header.css"
 
@@ -8,7 +8,7 @@ function Header() {
   return (
     <div className='holder'>
     <header className='header'>
-        <Navbar />
+        {/* <Navbar /> */}
         <Categories/>
 
         <div className='header-content flex flex-c text-center text-white'>
